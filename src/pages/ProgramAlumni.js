@@ -1,73 +1,53 @@
-import NavigationBar from "../components/NavigationBar";
-import BeritaAcaraProgramCards from "../components/BeritaAcaraProgramCards";
-import myImage1 from '../assets/images/photo1.jpeg';
-import myImage2 from '../assets/images/photo2.jpeg';
-import myImage3 from '../assets/images/photo3.jpeg';
+import NavigationBar from '../components/NavigationBar';
+import "../styles/programAlumni.css"
+import ProgramAlumniCards from '../components/ProgramAlumniCards';
+import { useState, useEffect } from 'react';
+import { getProgramAlumni } from '../api/Api';
+import Footer from '../components/Footer';
+
 
 function ProgramAlumni() {
-    const programAlumni = [
-        {
-            image: {
-                src: myImage3,
-                alt: "Program Alumni-1"
-            },
-            penulis: "Author",
-            judulBerita: "Judul program alumni 2",
-            kontenBerita: "Konten program alumni 1",
-            tanggalUpload: "Tanggal program alumni di post"
-        },
+    const [program, setProgram] = useState([]);
+    useEffect(() => {
+        const fetchProgram = async () => {
+            try {
+                const response = await getProgramAlumni(); // Ambil data berita dari API
+                console.log(response.data); // Cek data yang diterima dari API
 
-        {
-            image: {
-                src: myImage1,
-                alt: "Program Alumni-2"
-            },
-            penulis: "Author",
-            judulBerita: "Judul program alumni 2",
-            kontenBerita: "Konten program alumni 2",
-            tanggalUpload: "Tanggal program alumni di post"
-        },
+                // Ambil data berita dari respons API
+                const programArray = response.data.data;
 
-        {
-            image: {
-                src: myImage3,
-                alt: "Program Alumni-3"
-            },
-            penulis: "Author",
-            judulBerita: "Judul program alumni 3",
-            kontenBerita: "Konten program alumni 3",
-            tanggalUpload: "Tanggal program alumni di post"
-        },
-        {
-            image: {
-                src: myImage1,
-                alt: "Program Alumni-4"
-            },
-            penulis: "Author",
-            judulBerita: "Judul program alumni 4",
-            kontenBerita: "Konten program alumni 4",
-            tanggalUpload: "Tanggal program alumni di post"
-        },
+                if (Array.isArray(programArray)) {
+                    // Ambil hanya 3 berita terbaru
+                    const programData = programArray.map(item => ({
+                        id: item.id,
+                        image: item.image,
+                        authorId: item.authorId,
+                        title: item.title,
+                        content: item.description,
+                        createdAt: item.createdAt,
+                        category: item.category,
+                    }));
+                    setProgram(programData); // Update state dengan data berita
+                } else {
+                    console.error("Data yang diterima bukan array:", programArray);
+                }
+            } catch (error) {
+                console.error("Error fetching program: ", error);
+            }
 
-        {
-            image: {
-                src: myImage2,
-                alt: "Program Alumni-5"
-            },
-            penulis: "Author",
-            judulBerita: "Judul program alumni 5",
-            kontenBerita: "Konten program alumni 5",
-            tanggalUpload: "Tanggal program alumni di post"
-        },
-    ];
+        };
 
+        fetchProgram();
+    }, []);
 
     return (
         <>
             <NavigationBar />
-            <BeritaAcaraProgramCards beritaAcaraProgram={programAlumni} columnCount={4}/>
+            <ProgramAlumniCards program={program} columnCount={3} />
+            <Footer />
         </>
-    )
+    );
 }
 
 export default ProgramAlumni;

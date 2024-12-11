@@ -1,27 +1,34 @@
 import { Button, Row, Col, Card, Container } from 'react-bootstrap';
-import "../styles/beranda.css"
+import { useNavigate } from 'react-router-dom';
+import "../styles/beranda.css";
 
-function BerandaNews({berita}) {
+function BerandaNews({ berita }) {
+    const navigate = useNavigate();
+
     return (
-        <Container className='display-component'>
-            <h1 className='beranda-title'>
-                Berita
-            </h1>
-            <Row className="justify-content-center" style={{ paddingTop: '10px' }}>
-                {berita.map((berandaNews, i) => (
-                    <Col md={4} className='beranda-card d-flex justify-content-center' key={i}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={berandaNews.image.src} alt={berandaNews.image.alt} />
-                        <Card.Body className="card-body">
-                            <p>{berandaNews.penulis}</p>
-                            <Card.Title>{berandaNews.judulBerita}</Card.Title>
-                            <Card.Text>
-                                {berandaNews.kontenBerita}
-                            </Card.Text>
-                            <Button className='button-card'>Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
+        <Container className='beranda-container'>
+            <h4 className='beranda-title'>
+                BERITA
+            </h4>
+            <hr className='custom-hr' />
+            <Row className="justify-content-center mt-4" >
+                {berita.map((berandaNews) => (
+                    <Col md={4} className='beranda-card d-flex justify-content-center' key={berandaNews.id}>
+                        <Card style={{ width: '30rem' }} className='mt-4'>
+                            <Card.Img variant="top" src={berandaNews.image} alt={`Image for ${berandaNews.title}`} className='card-image' />
+                            <Card.Body className="card-body">
+                                {/* Menampilkan nama penulis jika ada */}
+                                <p>{berandaNews.authorName}</p>
+                                <Card.Title className='text-style'>{berandaNews.title}</Card.Title>
+                                <Card.Text className='text-style'>
+                                    {berandaNews.content.length > 100 ? `${berandaNews.content.substring(0, 100)}...` : berandaNews.content}
+                                </Card.Text>
+                                <Button className='button-card' onClick={() => navigate(`/detail-berita/${berandaNews.id}`)}>
+                                    Baca Selengkapnya
+                                </Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
                 ))}
             </Row>
         </Container>

@@ -1,26 +1,27 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-bootstrap/Carousel';
 import SlideImage from './SlideImages';
 import { Container } from 'react-bootstrap';
 
 function BerandaEvents({ images }) {
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
+
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
+
   return (
-    <Container className='display-component'>
-      <h1 className='beranda-title'>
-        Events
-      </h1>
-      <Carousel activeIndex={index} onSelect={handleSelect} > 
-        {images.map((image, i) => (
-          <Carousel.Item key={i}>
+    <Container className='beranda-container'>
+      <Carousel activeIndex={index} onSelect={handleSelect} className='slide-style'>
+        {images.map((image) => (
+          <Carousel.Item 
+            key={image.id}
+            onClick={() => navigate(`/detail-acara/${image.id}`)}
+            style={{ cursor: 'pointer' }}
+          >
             <SlideImage image={image.src} text={image.text} />
-            <Carousel.Caption>
-              <h3>{image.label}</h3>
-              <p>{image.caption}</p>
-            </Carousel.Caption>
           </Carousel.Item>
         ))}
       </Carousel>

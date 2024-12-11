@@ -1,0 +1,27 @@
+.container-berita{
+    margin-top: 50px;
+}
+
+.card-style {
+    /* padding: 30px; */
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.body-card {
+    background-color: #CBDCED;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 300px;
+}
+
+.card-image{
+    height: 250px;
+    object-fit: cover; 
+}
+
+.custom-text{
+    text-align: justify;
+}
+
+

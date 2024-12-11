@@ -1,0 +1,17 @@
+.custom-container {
+    background: #CBDCED;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.title-info {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 30px;
+}
+
+.content-info {
+    margin: 30px;
+    text-align: justify;
+    max-width: 100%;
+}

@@ -1,0 +1,21 @@
+/* tabel.css atau file CSS eksternal Anda */
+.custom-icon i {
+  font-size: 1.5rem; /* Atur ukuran ikon di sini */
+}
+
+.custom-dropdown {
+  width: 200px !important; /* Pastikan panjang dropdown konstan */
+}
+
+.dropdown-toggle-right {
+  text-align: left; /* Pastikan teks tetap rata kiri */
+  padding-right: 2rem; /* Tambahkan ruang untuk panah di sebelah kanan */
+  position: relative;
+}
+
+.dropdown-toggle-right::after {
+  position: absolute;
+  right: 1rem; /* Tempatkan panah di ujung kanan */
+  top: 50%; /* Posisikan secara vertikal di tengah */
+  transform: translateY(-50%);
+}

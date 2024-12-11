@@ -1,12 +1,14 @@
 import { Container, Button, Form, InputGroup, Nav } from 'react-bootstrap';
 import "../styles/login.css";
 import { useState } from 'react';
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Alerts from '../components/Alerts';
+import { login } from '../api/Api';
+import { useGlobal } from '../context/GlobalContext'; // Import useGlobal
 
 function Login() {
     const navigate = useNavigate();
+    const { updateGlobalData } = useGlobal(); // Akses updateGlobalData dari GlobalContext
     const [showPassword, setShowPassword] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -23,17 +25,40 @@ function Login() {
         } else {
             setPeringatanInvalid("");
         }
+
         try {
-            const response = await axios.post("http://localhost:2000/api/v1/auth/login", {
-                username: username,
-                password: password,
-            });
+            const response = await login(username, password);
             console.log(response.data);
-            // Arahkan ke halaman dashboard jika login berhasil
-            navigate('/dashboard-alumni');
+
+            // Ambil id, username, dan role dari respons server
+            const userId = response?.data?.data?.user?.id;
+            const role = response?.data?.data?.user?.role?.name;
+            const userName = response?.data?.data?.user?.username; // Ambil username
+
+            console.log("ID pengguna:", userId);
+            console.log("Role pengguna:", role);
+            console.log("Username pengguna:", userName);
+
+            // Simpan id, role, dan username ke GlobalContext
+            updateGlobalData('id', userId);
+            updateGlobalData('role', role);
+            updateGlobalData('username', userName); // Menyimpan username ke globalData
+
+            // Pengalihan berdasarkan role pengguna
+            if (role === 'alumni') {
+                navigate('/dashboard-alumni');
+            } else if (role === 'admin_universitas') {
+                navigate('/dashboard-admin-universitas');
+            } else if (role === 'admin_prodi') {
+                navigate('/dashboard-admin-prodi');
+            } else {
+                setPeringatanInvalid("Role tidak dikenal");
+            }
         } catch (error) {
-            console.log("Error Login", error);
-            setPeringatanInvalid("Login Gagal. Perika Username dan Kata Sandi Anda!")
+            console.error("Error saat login:", error);
+            const errorMessage = error.response?.data?.message;
+            console.log("Error message:", errorMessage);
+            setPeringatanInvalid(errorMessage || "Terjadi kesalahan saat login.");
         }
     };
 
@@ -45,7 +70,7 @@ function Login() {
                     <h5>Selamat datang di Sistem Informasi Alumni Universitas YARSI</h5>
                     <p className='mb-5'>Masukkan detail Anda untuk masuk ke akun Anda</p>
                 </div>
-                {peringatanInvalid && <Alerts peringatan={peringatanInvalid} />} {/* Tampilkan Alerts hanya jika ada peringatan */}
+                {peringatanInvalid && <Alerts peringatan={peringatanInvalid} />}
                 <Form>
                     <Form.Group className="mb-3 mx-4" controlId="formGroupUsername">
                         <Form.Label>Username</Form.Label>
@@ -53,8 +78,8 @@ function Login() {
                             className='label-login'
                             type="text"
                             placeholder="Masukkan Username"
-                            value={username} // Mengikat state
-                            onChange={(e) => setUsername(e.target.value)} // Update state
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group className="mb-3 mx-4" controlId="formGroupPassword">
@@ -64,8 +89,8 @@ function Login() {
                                 className='label-login'
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Masukkan Kata Sandi"
-                                value={password} // Mengikat state
-                                onChange={(e) => setPassword(e.target.value)} // Update state
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <InputGroup.Text
                                 onClick={togglePasswordVisibility}
@@ -86,4 +111,5 @@ function Login() {
         </Container>
     );
 }
+
 export default Login;

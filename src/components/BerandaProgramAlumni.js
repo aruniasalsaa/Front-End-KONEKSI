@@ -1,23 +1,27 @@
 import { Button, Row, Col, Card, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function BerandaProgramAlumni({ programAlumni }) {
+    const navigate = useNavigate();
+
     return (
-        <Container className="display-component">
-            <h1 className='beranda-title'>
-                Program Alumni
-            </h1>
-            <Row className="justify-content-center" style={{ paddingTop: '10px' }}>
-                {programAlumni.map((program, i) => (
-                    <Col md={4} className='beranda-card d-flex justify-content-center' key={i}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={program.image.src} alt={program.image.alt} />
+        <Container className='beranda-container'>
+            <h4 className='beranda-title'>
+                PROGRAM ALUMNI
+            </h4>
+            <hr className='custom-hr' />
+            <Row className="justify-content-center mt-4" style={{ paddingTop: '10px' }}>
+                {programAlumni.map((program) => (
+                    <Col md={4} className='beranda-card d-flex justify-content-center' key={program.id}>
+                        <Card style={{ width: '30rem' }} className='mt-4'>
+                            <Card.Img variant="top" src={program.image} alt={`Image for ${program.title}`} className='card-image' />
                             <Card.Body>
-                                <p>{program.penulis}</p>
-                                <Card.Title>{program.judulEvents}</Card.Title>
+                                <p>{program.authorName}</p>
+                                <Card.Title>{program.title}</Card.Title>
                                 <Card.Text>
-                                    {program.kontenEvents}
+                                {program.content.length > 100 ? `${program.content.substring(0, 100)}...` : program.content}
                                 </Card.Text>
-                                <Button className='button-card'>Go somewhere</Button>
+                                <Button className='button-card' onClick={() => navigate (`/detail-program-alumni/${program.id}`)}>Baca Selengkapnya</Button>
                             </Card.Body>
                         </Card>
                     </Col>

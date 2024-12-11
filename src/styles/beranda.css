@@ -2,58 +2,39 @@
     background-color: #38524C;
     color: white !important;
     justify-content: center;
-    padding: 5px !important;
 }
 
-.navbar-style:hover {
+.navbar-style .dropdown-toggle {
+    color: white !important;
+    margin-right: 20px;
+}
+
+.navbar-style .nav-link {
+    margin-right: 20px;
+}
+
+  
+
+.navbar-style .nav-link:hover,
+.navbar-style .nav-link.active {
     color: #CBDCED !important;
+    text-decoration: underline;
 }
 
-.informasi-beranda {
-    background: #CBDCED;
-    margin-top: 70px;
-    padding: 20px;
+.beranda-container{
+    margin-bottom: 80px;
 }
 
-.beranda-title{
-    margin-left: 3%;
-}
-
-.title-info {
-    font-size: 1.5rem; /* Gunakan rem untuk ukuran font yang lebih responsif */
-    font-weight: 500;
-    margin: 30px; /* Menggunakan margin relatif */
-}
-
-.content-info {
-    margin: 30px; /* Margin samping yang lebih responsif */
-    text-align: justify;
-    max-width: 100%; /* Memastikan konten tidak melebihi lebar */
+.beranda-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .beranda-images {
     margin: 10px;
-    width: 100%; /* Menggunakan persentase agar responsif */
-    height: auto; /* Membuat tinggi otomatis */
-}
-
-.galeri-foto {
-    max-width: 1224px;
-    width: 90%; /* Memastikan konten selalu responsif */
-    margin: auto;
-    padding: 20px; /* Padding yang lebih sedikit agar terlihat rapi */
-}
-
-.foto-beranda {
-    display: flex;
-    flex-wrap: wrap; /* Membuat elemen foto melipat saat layar kecil */
-    gap: 20px; /* Menggunakan gap untuk spasi */
-}
-
-.kolom-foto {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    width: 100%;
+    height: auto;
 }
 
 .beranda-news {
@@ -62,14 +43,14 @@
     padding-bottom: 100px;
 }
 
-.beranda-card {
-    padding-bottom: 50px;
-}
-
 .display-component {
     background: #CBDCED;
     margin-top: 30px;
     padding: 50px;
+}
+
+.text-style {
+    text-align: justify;
 }
 
 .footer-style {
@@ -89,23 +70,49 @@
     flex-direction: column;
 }
 
-/* Media Queries untuk tampilan yang lebih baik pada layar kecil */
-@media (max-width: 768px) {
-    .title-info {
-        font-size: 1.2rem; /* Ukuran font lebih kecil di layar kecil */
-        margin: 10px; /* Margin lebih kecil */
-    }
-    .content-info {
-        margin: 0 10px; /* Margin lebih kecil */
-    }
-    .beranda-images {
-        width: 80%; /* Lebar lebih besar di layar kecil */
-    }
-    .galeri-foto {
-        padding: 10px; /* Padding lebih kecil di layar kecil */
-    }
-    .beranda-news,
-    .display-component {
-        padding: 20px; /* Padding lebih kecil */
-    }
+.carousel-image-container {
+    width: 100%;
+}
+
+.carousel-image-container img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+.slide-style{
+    margin-top: 100px;
+}
+
+.image-acara{
+    height: 250px;
+    object-fit: cover; 
+}
+
+.custom-hr{
+    border-top: 5px solid #38524C !important;
+}
+
+.custom-overlay {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.title-bg {
+    background-color: rgba(0, 0, 0, 0.7); /* Warna background untuk judul */
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.card-image{
+    height: 200px;
+    object-fit: cover; 
+}
+
+.kategori-program{
+    margin-top: 100px;
 }

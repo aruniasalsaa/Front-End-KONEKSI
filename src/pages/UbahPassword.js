@@ -5,7 +5,7 @@ import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Alerts from '../components/Alerts';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import { changePassword } from '../api/Api';
 
 function UbahPassword() {
     const navigate = useNavigate();
@@ -22,9 +22,11 @@ function UbahPassword() {
     const togglePasswordVisibility1 = () => {
         setShowPassword1(!showPassword1);
     };
+
     const togglePasswordVisibility2 = () => {
         setShowPassword2(!showPassword2);
     };
+
     const togglePasswordVisibility3 = () => {
         setShowPassword3(!showPassword3);
     };
@@ -41,13 +43,8 @@ function UbahPassword() {
         }
 
         try {
-            const response = await axios.patch("http://localhost:2000/api/v1/auth/changePassword", {
-                username: username,
-                oldPassword: oldPassword,
-                newPassword: newPassword,
-                newConfirmPassword: confirmPassword
-            })
-
+            const response = await changePassword(username, oldPassword, newPassword, confirmPassword);
+            console.log("Ubah Kata Sandi berhasil: ", response.data)
             console.log(response.data);
             setPeringatanInvalid("");
             toast.success("Kata Sandi Berhasil Diubah!", {
@@ -59,15 +56,17 @@ function UbahPassword() {
                 progress: undefined,
                 theme: "light",
                 transition: Slide,
-            });
-           
+            })
+
             setTimeout(() => {
                 navigate('/masuk');
-            }, 3000);
-        }catch (error){
-            console.log("Ubah Kata Sandi Error", error);
+            }, 2000);
+        } catch (error) {
+            console.log(error);
+            const errorMessage = error.response?.data?.message;
+            console.error(errorMessage);
             setPeringatanInvalid("Ubah kata sandi gagal. Silakan periksa kembali data yang diinput.")
-        }        
+        }
     };
 
     return (
@@ -86,7 +85,7 @@ function UbahPassword() {
                             type="text"
                             placeholder="Masukkan Username"
                             value={username} // Bind state
-                            onChange={(e) => setUsername(e.target.value)} 
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                     </Form.Group>
 

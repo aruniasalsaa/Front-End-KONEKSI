@@ -1,0 +1,121 @@
+.custom-offcanvas {
+  width: 300px !important;
+  background-color: #38524c !important;
+  color: white !important;
+}
+
+.custom-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.custom-image-offcanvas {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.custom-offcanvas .custom-button-group .btn,
+.custom-offcanvas .custom-button-group .dropdown-toggle,
+.custom-offcanvas .custom-button-group .dropdown-item {
+  background-color: #38524c;
+  color: white;
+  border: none;
+  text-align: left;
+  width: 270px;
+}
+
+.custom-offcanvas .custom-button-group .btn:hover,
+.custom-offcanvas .custom-button-group .dropdown-item:hover {
+  background-color: #77808a;
+  /* Warna saat hover */
+}
+
+.custom-icon {
+  margin-right: 15px;
+}
+
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1050;
+  /* Agar tombol tetap berada di atas elemen lainnya */
+}
+
+.custom-offcanvas .btn-close {
+  filter: invert(1);
+}
+
+.custom-button-group .nav-dropdown {
+  width: 270px;
+  /* Sesuaikan dengan tombol */
+  text-align: left;
+  background-color: #38524c;
+  color: white;
+  border: none;
+}
+
+.custom-button-group .nav-dropdown .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #38524c;
+  color: white;
+  border: none;
+  text-align: left;
+  padding: 0px 10px;
+  /* Sesuaikan padding agar sejajar */
+  width: 270px;
+  /* Sesuaikan lebar */
+  margin-bottom: 5px;
+}
+
+.custom-button-group .nav-dropdown .dropdown-toggle i {
+  margin-right: 15px;
+  /* Jarak ikon dan teks */
+}
+
+.custom-button-group .nav-dropdown .dropdown-menu {
+  width: 270px;
+  /* Lebar dropdown sesuai tombol */
+  background-color: #77808a;
+  color: white;
+  border: none;
+}
+
+.custom-button-group .nav-dropdown .dropdown-item {
+  background-color: #77808a;
+  color: white;
+}
+
+.custom-button-group .nav-dropdown .dropdown-item:hover {
+  background-color: #5a6a74;
+}
+
+.custom-table {
+  text-align: justify;
+}
+
+.profile-container {
+  display: flex; /* Membuat foto dan nama dalam satu baris */
+  align-items: center; /* Vertikal sejajar tengah */
+  gap: 20px; /* Memberi jarak antara foto dan nama */
+}
+
+.custom-image {
+  width: 100px; /* Ukuran foto */
+  height: 100px; /* Tetap bulat */
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 2rem; /* Ukuran font nama */
+  margin: 0; /* Hapus margin bawaan */
+  font-weight: bold;
+}
+
+.custom-form{
+    background-color: lightgray !important;
+}

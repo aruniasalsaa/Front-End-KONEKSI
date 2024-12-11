@@ -1,0 +1,26 @@
+.container-detail-berita{
+    margin-top: 100px;
+}
+
+.custom-title{
+    text-align: center;
+}
+
+.custom-date{
+    text-align: center;
+}
+
+.custom-description{
+    text-align: justify;
+}
+
+.custom-author{
+    text-align: center;
+}
+
+.custom-image{
+    width: '50%';
+    height: '300px';
+    display: 'block'; 
+    margin: '0 auto';
+}
